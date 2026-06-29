@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+  :root{
+    /* 阿里巴巴品牌色板 */
+    --ali-orange:#FF6A00;       /* 主橙 */
+    --ali-orange-d:#E64A19;     /* 深橙 */
+    --ali-orange-l:#FF8F40;     /* 浅橙 */
+    --ali-gold:#FFB300;         /* 金黄（淘宝/天猫暖色） */
+    --ali-gold-d:#E69100;
+    --bg:#1c1410;               /* 暖黑底 */
+    --panel:#2a221c;
+    --txt:#fff;
+    --txt-dim:#f3ddca;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;}
+  body{background:var(--bg);}
+  .stage{width:1448px;height:674px;background:var(--bg);position:relative;padding:30px 50px;}
+
+  /* 顶部标题 + 箭头轴 */
+  .axis-title{text-align:center;color:var(--txt);font-size:24px;font-weight:600;margin-bottom:6px;}
+  .axis-line{position:relative;height:30px;margin:0 30px 4px;}
+  .axis-line .bar{position:absolute;top:14px;left:0;right:34px;height:2px;background:linear-gradient(90deg,var(--ali-orange),var(--ali-gold));}
+  .axis-line .arrow{position:absolute;top:7px;right:18px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:16px solid var(--ali-gold);}
+
+  .cols{display:grid;grid-template-columns:repeat(4,1fr);column-gap:34px;}
+  .timehdr{text-align:center;color:var(--txt-dim);font-size:22px;font-weight:600;padding:6px 0 14px;}
+
+  /* 卡片行 */
+  .row{display:grid;grid-template-columns:repeat(4,1fr);column-gap:34px;margin-bottom:18px;}
+  .card{border-radius:14px;padding:22px 18px;text-align:center;color:#fff;position:relative;box-shadow:0 6px 18px rgba(0,0,0,.35);}
+  .card .en{font-size:30px;font-weight:700;letter-spacing:.5px;}
+  .card .cn{font-size:20px;margin-top:8px;opacity:.95;}
+
+  .row-top .card{background:linear-gradient(135deg,var(--ali-orange),var(--ali-orange-d));}
+  .row-top .card.dashed{background:transparent;border:2px dashed var(--ali-orange-l);}
+  .row-bot .card{background:linear-gradient(135deg,var(--ali-gold),var(--ali-gold-d));}
+  .row-bot .card.dashed{background:transparent;border:2px dashed var(--ali-gold);}
+
+  /* 横向箭头 */
+  .hrow{position:relative;}
+  .conn{position:absolute;top:50%;transform:translateY(-50%);color:var(--ali-gold);font-size:26px;}
+
+  /* 顶部 roadmap 标题胶囊 */
+  .roadmap-tag{display:inline-block;margin:0 auto 10px;
+    background:#3a2c20;color:#fff;font-size:18px;font-weight:600;padding:8px 18px;border-radius:20px;
+    border:1px solid var(--ali-orange);box-shadow:0 4px 14px rgba(0,0,0,.45);white-space:nowrap;}
+  .tag-wrap{text-align:center;}
+
+  /* 竖直虚线 */
+  .vlines{display:grid;grid-template-columns:repeat(4,1fr);column-gap:34px;height:26px;}
+  .vlines .vl{display:flex;justify-content:center;}
+  .vlines .vl::before{content:"";width:0;border-left:2px dashed var(--ali-orange-l);height:100%;opacity:.7;}
+
+  /* 基座模型面板 */
+  .base{background:var(--panel);border:1px solid #4a3a2c;border-radius:16px;padding:18px 26px;}
+  .base-title{color:var(--ali-gold);font-size:24px;font-weight:700;margin-bottom:14px;}
+  .base-cols{display:grid;grid-template-columns:repeat(4,1fr);column-gap:26px;}
+  .base-cell{border-left:1px solid #4a3a2c;padding-left:18px;}
+  .base-cell:first-child{border-left:none;padding-left:0;}
+  .base-cell .lvl{color:var(--txt);font-size:22px;font-weight:700;}
+  .base-cell .mdl{color:var(--txt-dim);font-size:17px;margin-top:6px;}
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="tag-wrap"><div class="roadmap-tag">AI 工程范式、产品线与基座模型演进 roadmap</div></div>
+    <div class="axis-title">杠杆点离模型越来越远 →</div>
+    <div class="axis-line"><div class="bar"></div><div class="arrow"></div></div>
+
+    <div class="cols">
+      <div class="timehdr">~2022</div>
+      <div class="timehdr">2023–24</div>
+      <div class="timehdr">2025+</div>
+      <div class="timehdr">下一步</div>
+    </div>
+
+    <div class="row row-top hrow">
+      <div class="card"><div class="en">Prompt</div><div class="cn">优化指令</div></div>
+      <div class="card"><div class="en">Context</div><div class="cn">优化上下文</div></div>
+      <div class="card"><div class="en">Harness</div><div class="cn">优化外层循环</div></div>
+      <div class="card dashed"><div class="en">Organization</div><div class="cn">编排数字员工</div></div>
+      <div class="conn" style="left:23.5%">→</div>
+      <div class="conn" style="left:49%">→</div>
+      <div class="conn" style="left:74.5%">→</div>
+    </div>
+
+    <div class="row row-bot">
+      <div class="card"><div class="en">Copilot</div><div class="cn">代码补全</div></div>
+      <div class="card"><div class="en">Qoder</div><div class="cn">结对 · Agent</div></div>
+      <div class="card"><div class="en">Quest</div><div class="cn">+ QoderWork</div></div>
+      <div class="card dashed"><div class="en">QoderWake</div><div class="cn">数字员工 · 编队</div></div>
+    </div>
+
+    <div class="vlines">
+      <div class="vl"></div><div class="vl"></div><div class="vl"></div><div class="vl"></div>
+    </div>
+
+    <div class="base" style="margin-top:8px;">
+      <div class="base-title">基座模型 · 多供给 · 可切换（价值不在此层）</div>
+      <div class="base-cols">
+        <div class="base-cell"><div class="lvl">补全级</div><div class="mdl">GPT-3 / Codex</div></div>
+        <div class="base-cell"><div class="lvl">指令遵循</div><div class="mdl">GPT-3.5 · Qwen</div></div>
+        <div class="base-cell"><div class="lvl">长上下文/工具</div><div class="mdl">Claude · Qwen</div></div>
+        <div class="base-cell"><div class="lvl">长程自主</div><div class="mdl">前沿多模型</div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
