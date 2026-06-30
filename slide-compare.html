@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+  :root{
+    --ali-orange:#FF6A00;
+    --ali-orange-d:#E64A19;
+    --teal:#0BA5A5;
+    --teal-d:#0A8585;
+    --ink:#1f2329;
+    --ink-dim:#5b6470;
+    --line:#ececef;
+    --row:#fafafa;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;}
+  .slide{width:1920px;height:1080px;background:#fff;position:relative;padding:64px 80px 56px;}
+
+  /* 顶部品牌条 */
+  .topbar{position:absolute;top:0;left:0;width:100%;height:10px;
+    background:linear-gradient(90deg,var(--ali-orange),var(--teal));}
+
+  .head{display:flex;align-items:baseline;gap:22px;margin-bottom:8px;}
+  .title{font-size:52px;font-weight:800;color:var(--ink);letter-spacing:.5px;}
+  .title .vs{color:var(--ali-orange);}
+  .title .vs2{color:var(--teal);}
+  .subtitle{font-size:24px;color:var(--ink-dim);margin-bottom:18px;}
+
+  table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;}
+  col.c1{width:18%;} col.c2{width:41%;} col.c3{width:41%;}
+
+  thead th{padding:16px 26px;font-size:30px;font-weight:800;color:#fff;text-align:left;}
+  thead .h1{background:var(--ink);border-top-left-radius:14px;}
+  thead .h2{background:linear-gradient(135deg,var(--ali-orange),var(--ali-orange-d));}
+  thead .h3{background:linear-gradient(135deg,var(--teal),var(--teal-d));border-top-right-radius:14px;}
+  thead .h2 .tag,thead .h3 .tag{display:block;font-size:18px;font-weight:600;opacity:.9;margin-top:2px;}
+
+  tbody td{padding:13px 26px;font-size:25px;color:var(--ink);vertical-align:middle;
+    border-bottom:1px solid var(--line);line-height:1.3;}
+  tbody tr:nth-child(even) td{background:var(--row);}
+  tbody td.dim{font-weight:700;color:var(--ink);}
+  tbody td.dim::before{content:"";display:inline-block;width:6px;height:22px;border-radius:3px;
+    background:var(--ali-orange);margin-right:14px;vertical-align:-3px;}
+  tbody td.api{color:#34404d;}
+  tbody td.oss{color:#34404d;}
+  tbody tr:last-child td{border-bottom:none;}
+
+  .foot{position:absolute;bottom:26px;left:80px;right:80px;display:flex;justify-content:space-between;
+    font-size:18px;color:#9aa3ad;border-top:1px solid var(--line);padding-top:12px;}
+  .legend{display:flex;gap:26px;align-items:center;}
+  .dot{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:8px;vertical-align:-2px;}
+  .dot.o{background:var(--ali-orange);} .dot.t{background:var(--teal);}
+</style>
+</head>
+<body>
+  <div class="slide">
+    <div class="topbar"></div>
+
+    <div class="head">
+      <div class="title"><span class="vs">闭源（API）</span> vs <span class="vs2">开源（权重发布）</span></div>
+    </div>
+    <div class="subtitle">大模型选型对比 · 11 个关键维度</div>
+
+    <table>
+      <colgroup><col class="c1"><col class="c2"><col class="c3"></colgroup>
+      <thead>
+        <tr>
+          <th class="h1">对比维度</th>
+          <th class="h2">闭源<span class="tag">API · 托管调用</span></th>
+          <th class="h3">开源<span class="tag">权重发布 · 自行部署</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="dim">模型能力</td><td class="api">同名版本通常更强，持续优化迭代</td><td class="oss">发布时刻的固定快照，能力不再更新</td></tr>
+        <tr><td class="dim">上下文长度</td><td class="api">更长（如 Qwen-Long 1M tokens）</td><td class="oss">通常 32K/128K，需自行扩展</td></tr>
+        <tr><td class="dim">训练数据</td><td class="api">可能用了更多 / 更新的数据</td><td class="oss">发布时的训练数据截止</td></tr>
+        <tr><td class="dim">对齐与安全</td><td class="api">更严格，根据线上反馈持续调整</td><td class="oss">固定状态，用户可微调修改</td></tr>
+        <tr><td class="dim">推理性能</td><td class="api">专有推理加速，低延迟高吞吐</td><td class="oss">自行部署优化（vLLM / TGI 等）</td></tr>
+        <tr><td class="dim">功能完整度</td><td class="api">Tool calling、structured output 等更成熟</td><td class="oss">基础能力具备，工程化需自建</td></tr>
+        <tr><td class="dim">更新方式</td><td class="api">静默升级，同 endpoint 背后模型可能已迭代</td><td class="oss">版本固定，等下一个 release</td></tr>
+        <tr><td class="dim">数据安全</td><td class="api">数据经过服务商</td><td class="oss">私有部署，数据不出域</td></tr>
+        <tr><td class="dim">定制化</td><td class="api">仅支持 API 参数调整</td><td class="oss">可全量微调 / LoRA / 量化等</td></tr>
+        <tr><td class="dim">成本模式</td><td class="api">按 token 付费，无需 GPU</td><td class="oss">需自备算力，一次性部署成本高</td></tr>
+        <tr><td class="dim">适用场景</td><td class="api">追求最优效果、快速上线、不敏感数据</td><td class="oss">私有化部署、领域微调、数据合规要求高</td></tr>
+      </tbody>
+    </table>
+
+    <div class="foot">
+      <div class="legend"><span><span class="dot o"></span>闭源 API</span><span><span class="dot t"></span>开源权重</span></div>
+      <div>大模型选型 · 闭源 vs 开源</div>
+    </div>
+  </div>
+</body>
+</html>
